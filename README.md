@@ -2,7 +2,7 @@ Topicalizer
 =================
 
 Topicalizer is a tool that allow you to process a bunch of SOAP API descriptors
-in order to grouping the technical information they contain, in semantic related
+in order to group the technical information they contain, in semantic related
 categories, and specifying this categorization as RDF statements stored in a Sesame
 triple-store. As a first step in the process of categorization, This tool applies 
 text processing procedures over the service descriptors for extracting some relevant
