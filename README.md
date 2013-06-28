@@ -68,15 +68,17 @@ that Python can find them to use these scripts.
 * Open a terminal and type `./run.sh` followed by the path of a text file containing the
   list of service descriptor URIs. You could use the `sample-service-uris.txt` provided
   with the tool.
+
   ```
   $./run.sh sample-service-uris.txt
   ```
+  
 * After running the whole process, you could verify that the Sesame store you have created
   has been populated with RDF statements corresponding to the categorization extracted by 
   running the Online LDA algorithm. These RDF statements instantiate the Classes and
   Properties defined in the RDF Schema model available at `onlinelda/rdf_sesame/web_api_model.rdf`.
   Additionally, the categorization results are also available as .txt and .csv files 
-  at the `outcome` foder:
+  at the `outcome/` foder:
   ```
   - per-document-topics.<txt/csv>: distribution over topics for each one of the processed 
   operations.
