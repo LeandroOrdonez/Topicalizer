@@ -4,7 +4,7 @@ Topicalizer
 Topicalizer is a tool that allow you to process a bunch of SOAP API descriptors
 in order to group the technical information they contain, in semantic related
 categories, and specifying this categorization as RDF statements stored in a Sesame
-triple-store. As a first step in the process of categorization, This tool applies 
+triple-store. As a first step in the process of categorization, this tool applies 
 text processing procedures over the service descriptors for extracting some relevant
 technical information (operations, documentation and datatypes). Once such information
 is available, the tool fits a probabilistic topic model, known as Online LDA, for
