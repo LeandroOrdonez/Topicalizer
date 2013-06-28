@@ -52,13 +52,14 @@ that Python can find them to use these scripts.
 
 ##Initial Settings
 1. In MySQL create a Database with name `service_registry`.
-2. Deploy both of the `Sesame Framework` .war files on your servlet container.
+2. Deploy both of the Sesame Framework .war files on your servlet container.
    After you have deployed the Sesame Server webapp, you should be able to access it, by
    default, at path `/openrdf-sesame` (`/openrdf-sesame/home/overview.view` for
    Apache Tomcat 7).
 3. Create a new `Native Java Store` with ID `WebAPIModel` in the Sesame Server, by 
    accessing http://localhost:8080/openrdf-workbench/ -> `New repository`.
 4. Give execution permissions on the `run.sh` script. Open a terminal and type:
+
    ```
    chmod u+x run.sh
    ```
