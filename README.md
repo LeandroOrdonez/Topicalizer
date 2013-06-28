@@ -61,7 +61,7 @@ that Python can find them to use these scripts.
 4. Give execution permissions on the `run.sh` script. Open a terminal and type:
 
    ```
-   chmod u+x run.sh
+   $chmod u+x run.sh
    ```
 ##Running
 * Open a terminal and type `./run.sh` followed by the path of a text file containing the
