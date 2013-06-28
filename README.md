@@ -28,7 +28,7 @@ VB algorithm could for large corpora.
 
 ##Files/Directories provided:
 * `lib/`: Java Dependencies.
-* `onlinelda`: Folder containing the Python scripts which uses online VB for LDA to analyze 
+* `onlinelda/`: Folder containing the Python scripts which uses online VB for LDA to analyze 
   the information that has been extracted from SOAP API descriptors.
 * `outcome/`: This folder holds the .txt and .csv files containing the results of
    applying Online LDA (`topics.<txt/csv>` and `per-document-topics.<txt/csv>`).
