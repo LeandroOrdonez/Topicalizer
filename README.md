@@ -78,6 +78,7 @@ that Python can find them to use these scripts.
   Properties defined in the RDF Schema model available at `onlinelda/rdf_sesame/web_api_model.rdf`.
   Additionally, the categorization results are also available as .txt and .csv files 
   at the `outcome/` foder:
+
   ```
   - per-document-topics.<txt/csv>: distribution over topics for each one of the processed 
   operations.
