@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rdf:RDF
+    xmlns="http://www.example.org/web_api_model.rdf#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xml:base="http://www.example.org/web_api_model.rdf">
+    <Membership_Relation rdf:about="http://www.example.org/membership_relations/0">
+      <membership_probability rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.4</membership_probability>
+      <category_value rdf:resource="http://www.example.org/categories/0"/>
+    </Membership_Relation>
+    <Membership_Relation rdf:about="http://www.example.org/membership_relations/1">
+      <membership_probability rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.5</membership_probability>
+      <category_value rdf:resource="http://www.example.org/categories/1"/>
+    </Membership_Relation>
+    <Membership_Relation rdf:about="http://www.example.org/membership_relations/2">
+      <membership_probability rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.1</membership_probability>
+      <category_value rdf:resource="http://www.example.org/categories/2"/>
+    </Membership_Relation>
+    <Operation rdf:about="http://www.example.org/operations/0">
+      <has_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">StandarizedAddress</has_name>
+      <has_service_uri rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://ws.cdyne.com/psaddress/addresslookup.asmx?wsdl</has_service_uri>
+      <is_member_of rdf:resource="http://www.example.org/membership_relations/0"/>
+      <is_member_of rdf:resource="http://www.example.org/membership_relations/1"/>
+      <is_member_of rdf:resource="http://www.example.org/membership_relations/2"/>
+    </Operation>
+    <Term_Relation rdf:about="http://www.example.org/term_relations/0">
+      <term_probability rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.6</term_probability>
+      <term_value rdf:resource="http://www.example.org/terms/0"/>
+    </Term_Relation>
+    <Term_Relation rdf:about="http://www.example.org/term_relations/1">
+      <term_probability rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.3</term_probability>
+      <term_value rdf:resource="http://www.example.org/terms/0"/>
+    </Term_Relation>
+    <Term_Relation rdf:about="http://www.example.org/term_relations/2">
+      <term_probability rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.2</term_probability>
+      <term_value rdf:resource="http://www.example.org/terms/0"/>
+    </Term_Relation>
+    <Category rdf:about="http://www.example.org/categories/1">
+      <has_term rdf:resource="http://www.example.org/term_relations/1"/>
+    </Category> 
+    <Category rdf:about="http://www.example.org/categories/2">
+      <has_term rdf:resource="http://www.example.org/term_relations/2"/>
+    </Category>
+    <Category rdf:about="http://www.example.org/categories/0">
+      <has_term rdf:resource="http://www.example.org/term_relations/0"/>
+    </Category>
+    <Term rdf:about="http://www.example.org/terms/0">
+      <has_content rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hello world</has_content>
+    </Term>
+</rdf:RDF>

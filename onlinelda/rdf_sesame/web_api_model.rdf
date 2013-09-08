@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rdf:RDF
+    xmlns="http://www.example.org/web_api_model.rdf#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://www.example.org/web_api_model.rdf">
+  <rdfs:Class rdf:ID="Category"/>
+  <rdfs:Class rdf:ID="Operation"/>
+  <rdfs:Class rdf:ID="Membership_Relation"/>
+  <rdfs:Class rdf:ID="Term"/>
+  <rdfs:Class rdf:ID="Term_Relation"/>
+  <rdf:Property rdf:ID="is_member_of">
+    <rdfs:domain rdf:resource="#Operation"/>
+    <rdfs:range rdf:resource="#Membership_Relation"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="category_value">
+    <rdfs:range rdf:resource="#Category"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#value"/>
+    <rdfs:domain rdf:resource="#Membership_Relation"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="membership_probability">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <rdfs:domain rdf:resource="#Membership_Relation"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_term">
+    <rdfs:domain rdf:resource="#Category"/>
+    <rdfs:range rdf:resource="#Term_Relation"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="term_value">
+    <rdfs:range rdf:resource="#Term"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#value"/>
+    <rdfs:domain rdf:resource="#Term_Relation"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="term_probability">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <rdfs:domain rdf:resource="#Term_Relation"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_content">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Term"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_name">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Operation"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="has_service_uri">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+    <rdfs:domain rdf:resource="#Operation"/>
+  </rdf:Property>
+</rdf:RDF>
