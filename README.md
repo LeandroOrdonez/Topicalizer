@@ -84,5 +84,5 @@ that Python can find them to use these scripts.
 
   - topics.<txt/csv>: distributions over terms for each one of the topics extracted.
   ```
-  
+
 
