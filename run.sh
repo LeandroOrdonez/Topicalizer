@@ -44,12 +44,10 @@ echo "--> Starting Step 1: Retrieving and processing the service descriptors."
 echo
 t=$(timer)
 # without proxy:
-# java -jar WebAPIDocProcessing.jar $SERVICE_URIS_PATH .doc/
+java -jar WebAPIDocProcessing.jar $SERVICE_URIS_PATH .doc/
 #
 # with proxy:
 #java -Dhttp.useProxy=true -Dhttp.proxyHost='proxy.unicauca.edu.co' -Dhttp.proxyPort=3128 -Dhttp.nonProxyHosts='127.0.0.1|localhost' -jar WebAPIDocProcessing.jar $SERVICE_URIS_PATH .doc/
-#without proxy:
-java -jar WebAPIDocProcessing.jar $SERVICE_URIS_PATH .doc/
 
 echo
 echo
