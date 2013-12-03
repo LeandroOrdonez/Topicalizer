@@ -22,13 +22,12 @@ import sys, os, re, random, math, urllib2, time, cPickle
 import numpy
 import MySQLdb as mysql
 
-import onlineldavb
 import rdf_sesame.model_instantiation as rdfmi
 import rdf_sesame.sesamehandler as sesame
 
 def main():
     """
-    Displays the per-document topic distribution fit by onlineldavb.py. The first column gives the
+    Displays the per-document topic distribution fitted by onlineldavb.py. The first column gives the
     (expected) most prominent topics in the document, the second column
     gives their (expected) relative prominence.
     """
