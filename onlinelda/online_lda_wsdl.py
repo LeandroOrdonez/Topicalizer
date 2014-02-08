@@ -67,7 +67,7 @@ def main():
     D = 3.3e6
     #D = len(docs)
     # The number of topics
-    K = 40
+    K = 30
 
     # How many documents to look at
     #print batchsize

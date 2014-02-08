@@ -19,6 +19,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import numpy as np
+import sys
 
 """
 Generates a JSON file from the per-document topic distribution fitted by 
@@ -26,9 +27,15 @@ onlineldavb.py
 """
 
 def run():
-    pdc = np.loadtxt('../../outcome/per-document-topics.csv', dtype={'names': \
-('Operation ID', 'Operation Name', 'Topic', 'Topic Probability', 'Terms'),\
-'formats': ('i4', 'S100', 'i4', 'f4', 'S400')}, delimiter=',', skiprows=1)
+    if(len(sys.argv) > 1):
+	csv_path = sys.argv[1]
+        json_path = sys.argv[1][:(sys.argv[1].index('.csv'))] + '.json'
+    else:
+        csv_path = '../../outcome/per-document-topics.csv'
+        json_path = '../../outcome/per-document-topics.json'
+    pdc = np.loadtxt(csv_path, dtype={'names': \
+('Operation ID', 'Operation Name', 'Topic', 'Topic Probability', 'Terms', 'Service URI'),\
+'formats': ('i4', 'S100', 'i4', 'f4', 'S400', 'S400')}, delimiter=',', skiprows=1)
     pcd = sorted(pdc, key = lambda x: x[2])
 # print pdt[0:5]
 # print ptd[0:5]
@@ -36,7 +43,7 @@ def run():
     doc_categories = dict()
     for doc in pdc:
         if int(doc[3]*1000) > 150:
-            key = (doc[0], doc[1])
+            key = (doc[0], doc[1], doc[5])
 #    print key
             if (not key in doc_categories):
                 doc_categories[key] = [('Category-'+`doc[2]`, int(doc[3]*1000))]
@@ -49,9 +56,9 @@ def run():
         if int(category[3]*1000) > 150:
             key = 'Category-'+`category[2]`
             if (not key in category_docs):
-                category_docs[key] = [(category[0], category[1])]
+                category_docs[key] = [(category[0], category[1], category[5])]
             else:
-                category_docs[key].append((category[0], category[1]))
+                category_docs[key].append((category[0], category[1], category[5]))
 #print topic_docs
 
     json_output = '' + \
@@ -62,9 +69,9 @@ def run():
     ]
    }""" % jsonify_categories(category_docs, doc_categories)
     
-    print json_output
+    #print json_output
     #np.savetxt('../../outcome/per-document-topics.json', json_output)
-    pdc_json_file = open('../../outcome/per-document-topics.json', 'w')
+    pdc_json_file = open(json_path, 'w')
     pdc_json_file.write(json_output)
     pdc_json_file.close()
 
@@ -74,16 +81,19 @@ def jsonify_categories(category_docs, doc_categories):
     for category in category_docs:
         result += \
 '{\n    "name": "' + category + \
-'", \n    "children": [\n %s\n]\n},' % jsonify_documents(category_docs[category], doc_categories)
+'", \n    "id": "' + category + \
+'", \n    "children": [\n %s\n]\n},' % jsonify_documents(category, category_docs[category], doc_categories)
     #print result[:-1]
     return result[:-1]
 
-def jsonify_documents(docs, doc_categories):
+def jsonify_documents(category, docs, doc_categories):
     #print 'entro a jsonify_documents'
     result = ''
     for doc in docs:
         result += \
 '{\n    "name": "' + doc[1] + \
+'", \n  "id": "Operation-' + category[(category.index('-')+1):] + '.' + `doc[0]` + \
+'", \n  "service_uri": "' + doc[2] + \
 '", \n    "children": [\n %s\n]\n},' % jsonify_cat_per_doc(doc_categories[doc])
     #print result[:-1]
     return result[:-1]

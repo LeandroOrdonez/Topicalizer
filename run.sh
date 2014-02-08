@@ -60,6 +60,10 @@ echo
 python online_lda_wsdl.py ../.doc/
 python printtopics.py dictnostops.txt parameters/lambda-all.dat 15
 python printtopicdistributions.py parameters/gamma-all.dat 5
+
+# generating JSON output
+python ./json_handler/jsonify.py ../outcome/per-document-topics.csv
+cp ../outcome/per-document-topics.json /home/leandro/NetBeansProjects/D3-Demo/web/datasources
 #w
 echo "Topic Model Done..."
 echo
