@@ -63,7 +63,9 @@ python printtopicdistributions.py parameters/gamma-all.dat 5
 
 # generating JSON output
 python ./json_handler/jsonify.py ../outcome/per-document-topics.csv
-cp ../outcome/per-document-topics.json /home/leandro/NetBeansProjects/D3-Demo/web/datasources
+cp ../outcome/per-document-topics.json /home/leandro/NetBeansProjects/TopicalizerBrowser/web/datasources
+cp ../outcome/per-document-topics.csv /home/leandro/NetBeansProjects/TopicalizerBrowser/web/datasources
+cp ../outcome/topics.csv /home/leandro/NetBeansProjects/TopicalizerBrowser/web/datasources
 #w
 echo "Topic Model Done..."
 echo
