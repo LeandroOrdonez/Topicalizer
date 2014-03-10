@@ -20,6 +20,8 @@
 
 import numpy as np
 import sys
+import MySQLdb as mysql
+from xml.sax.saxutils import escape
 
 """
 Generates a JSON file from the per-document topic distribution fitted by 
@@ -88,12 +90,20 @@ def jsonify_categories(category_docs, doc_categories):
 
 def jsonify_documents(category, docs, doc_categories):
     #print 'entro a jsonify_documents'
+    # Connecting to MySQL database:
+    db = mysql.connect(host='localhost', user='root', passwd='', db='service_registry', unix_socket='/opt/lampp/var/mysql/mysql.sock')
+    cursor = db.cursor()
     result = ''
     for doc in docs:
+        #Querying the database for retrieving the operation name and service uri
+        query = 'SELECT SOAP_OPERATION.OPERATIONDOCUMENTATION FROM SOAP_OPERATION WHERE SOAP_OPERATION.ID=%s' % `(doc[0]+1)`
+        id_op = cursor.execute(query)
+        db_results = cursor.fetchall()
         result += \
 '{\n    "name": "' + doc[1] + \
 '", \n  "id": "Operation-' + category[(category.index('-')+1):] + '.' + `doc[0]` + \
 '", \n  "service_uri": "' + doc[2] + \
+'", \n  "operation_doc": "' + escape(db_results[0][0], {'"':"&quot;", "'":"&apos;", "\n":"&lt;br /&gt;", "\t":"&nbsp;"}) + \
 '", \n    "children": [\n %s\n]\n},' % jsonify_cat_per_doc(doc_categories[doc])
     #print result[:-1]
     return result[:-1]
