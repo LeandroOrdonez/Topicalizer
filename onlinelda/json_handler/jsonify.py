@@ -19,9 +19,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import numpy as np
-import sys
+import sys, nltk, re
 import MySQLdb as mysql
-from xml.sax.saxutils import escape
+#from xml.sax.saxutils import escape
 
 """
 Generates a JSON file from the per-document topic distribution fitted by 
@@ -99,11 +99,13 @@ def jsonify_documents(category, docs, doc_categories):
         query = 'SELECT SOAP_OPERATION.OPERATIONDOCUMENTATION FROM SOAP_OPERATION WHERE SOAP_OPERATION.ID=%s' % `(doc[0])`
         id_op = cursor.execute(query)
         db_results = cursor.fetchall()
+        op_doc = nltk.clean_html(db_results[0][0])
+        op_doc = re.sub('"', "'", re.sub("\t|\n", " ", op_doc))
         result += \
 '{\n    "name": "' + doc[1] + \
 '", \n  "id": "Operation-' + category[(category.index('-')+1):] + '.' + `doc[0]` + \
 '", \n  "service_uri": "' + doc[2] + \
-'", \n  "operation_doc": "' + escape(db_results[0][0], {'"':"&quot;", "'":"&apos;", "\n":"&lt;br /&gt;", "\t":"&nbsp;"}) + \
+'", \n  "operation_doc": "' + op_doc + \
 '", \n    "children": [\n %s\n]\n},' % jsonify_cat_per_doc(doc_categories[doc])
     #print result[:-1]
     return result[:-1]
