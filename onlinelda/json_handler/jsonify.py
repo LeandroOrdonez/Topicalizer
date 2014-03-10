@@ -96,7 +96,7 @@ def jsonify_documents(category, docs, doc_categories):
     result = ''
     for doc in docs:
         #Querying the database for retrieving the operation name and service uri
-        query = 'SELECT SOAP_OPERATION.OPERATIONDOCUMENTATION FROM SOAP_OPERATION WHERE SOAP_OPERATION.ID=%s' % `(doc[0]+1)`
+        query = 'SELECT SOAP_OPERATION.OPERATIONDOCUMENTATION FROM SOAP_OPERATION WHERE SOAP_OPERATION.ID=%s' % `(doc[0])`
         id_op = cursor.execute(query)
         db_results = cursor.fetchall()
         result += \
