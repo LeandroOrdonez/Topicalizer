@@ -58,8 +58,9 @@ cd onlinelda
 echo "--> Starting Step 2: Running Online LDA over the information regarding service operations."
 echo
 python online_lda_wsdl.py ../.doc/
-python printtopics.py dictnostops.txt parameters/lambda-all.dat 15
-python printtopicdistributions.py parameters/gamma-all.dat 5
+#python printtopics.py dictnostops.txt parameters/lambda-all.dat 15
+python printtopics.py wlist_match10.txt parameters/lambda-all.dat 15
+python printtopicdistributions.py parameters/gamma-all.dat 3
 
 # generating JSON output
 python ./json_handler/jsonify.py ../outcome/per-document-topics.csv
