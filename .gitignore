@@ -44,3 +44,5 @@ outcome/
 *.gitignore~
 *.sh~
 *.md~
+*.eldest
+*.rdf~
