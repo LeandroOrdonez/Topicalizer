@@ -38,7 +38,7 @@ def run():
     pdc = np.loadtxt(csv_path, dtype={'names': \
 ('Operation ID', 'Operation Name', 'Topic', 'Topic Probability', 'Terms', 'Service URI'),\
 'formats': ('i4', 'S100', 'i4', 'f4', 'S400', 'S400')}, delimiter=',', skiprows=1)
-    pcd = sorted(pdc, key = lambda x: x[2])
+    pcd = sorted(pdc, key = lambda x: (x[2], (1-x[3]))) # sorting by topic and topic probability
 # print pdt[0:5]
 # print ptd[0:5]
 
@@ -60,7 +60,8 @@ def run():
             if (not key in category_docs):
                 category_docs[key] = [(category[0], category[1], category[5])]
             else:
-                category_docs[key].append((category[0], category[1], category[5]))
+                if (len(category_docs[key]) <= 30):
+                    category_docs[key].append((category[0], category[1], category[5]))
 #print topic_docs
 
     json_output = '' + \
