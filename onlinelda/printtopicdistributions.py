@@ -22,13 +22,12 @@ import sys, os, re, random, math, urllib2, time, cPickle
 import numpy
 import MySQLdb as mysql
 
-import onlineldavb
 import rdf_sesame.model_instantiation as rdfmi
 import rdf_sesame.sesamehandler as sesame
 
 def main():
     """
-    Displays the per-document topic distribution fit by onlineldavb.py. The first column gives the
+    Displays the per-document topic distribution fitted by onlineldavb.py. The first column gives the
     (expected) most prominent topics in the document, the second column
     gives their (expected) relative prominence.
     """
@@ -44,7 +43,7 @@ def main():
 
     topics_file = open('../outcome/per-document-topics.txt', 'w')
     topics_csv = open('../outcome/per-document-topics.csv', 'w')
-    topics_csv.write('Operation ID,Operation Name,Topic,Topic Probability,Terms\n')
+    topics_csv.write('Operation ID,Operation Name,Topic,Topic Probability,Terms,Service URI\n')
     words_per_topic = file('../outcome/words_per_topic.txt').readlines()
     # Creating a Sesame repository handler (with default values).
     repo = sesame.SesameHandler()
@@ -70,7 +69,7 @@ def main():
         for i in range(0, topics_per_document):
             #print '\t Topic %s  \t---\t  %.4f' % (temp[i][1], temp[i][0])
 	    topics_file.write('\t Topic %s  \t---\t  %.4f \n' % (temp[i][1], temp[i][0]))
-            topics_csv.write('%s,%s,%s,%.4f,%s\n' % (`(d+1)`, results[0][0], temp[i][1], temp[i][0], words_per_topic[temp[i][1]].rstrip()))
+            topics_csv.write('%s,%s,%s,%.4f,%s,%s\n' % (`(d+1)`, results[0][0], temp[i][1], temp[i][0], words_per_topic[temp[i][1]].rstrip(), results[0][1]))
             membership_relation = rdfmi.new_membership_relation(`(d+1)` + ';' + `temp[i][1]`, temp[i][0], `temp[i][1]`)
             membership_relations.append(`(d+1)` + ';' + `temp[i][1]`)
             rdf_data = rdf_data + membership_relation

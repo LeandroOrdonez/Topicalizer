@@ -23,7 +23,7 @@ import httplib2
 class SesameHandler:
 
     def __init__(self, repository='WebAPIModel', sesame_server='http://localhost:8080/openrdf-sesame/', \
-namespace='http://www.example.org/web_api_model.rdf', resource='statements'):
+namespace='http://www.topicalizer.org/web_api_model.rdf', resource='statements'):
         """
 	Documentation...
         """

@@ -41,3 +41,8 @@ nosetests.xml
 outcome/
 *.old
 *.jar
+*.gitignore~
+*.sh~
+*.md~
+*.eldest
+*.rdf~

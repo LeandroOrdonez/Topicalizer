@@ -20,7 +20,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-import cPickle, string, numpy, getopt, sys, random, time, re, pprint, os
+import cPickle, string, numpy, getopt, sys, random, time, re, pprint, os, math
+import resource
 
 import onlineldavb
 #import wikirandom
@@ -29,19 +30,24 @@ def get_file_content(n, batchsize, path):
     content = list()
     ids = list()
     set_size = len(os.listdir(path))
-    lower = (batchsize*n - (batchsize - 1)) % set_size
-    if (batchsize*n) % set_size != 0:
-        upper = (batchsize*n) % set_size + 1
+    if (batchsize*n > set_size):
+        lower = (batchsize*n - (batchsize - 1))
+        upper = set_size + 1
     else:
-	upper = set_size + 1
+        lower = (batchsize*n - (batchsize - 1)) % set_size
+        if (batchsize*n) % set_size != 0:
+            upper = (batchsize*n) % set_size + 1
+        else:
+            upper = set_size + 1
     _range = range(lower, upper)
     #print _range
     for i in _range:
-	file_name = path + str(i) + '.txt'
-        all = file(file_name).read()
-        content.append(all)
-	#print all
-        ids.append(i)
+        file_name = path + str(i) + '.txt'
+        if (os.path.isfile(file_name)):
+            all = file(file_name).read()
+            content.append(all)
+            #print all
+            ids.append(i)
     return (content, ids)
 
 
@@ -55,26 +61,27 @@ def main():
 
     # The number of documents to analyze each iteration
     rest = 1
-    #batchsize = len(docs)
-    batchsize = 4
+    #batchsize = int(math.ceil(len(docs)/100))
+    batchsize = 15
     #print len(docs)
-    while rest != 0:
-        rest = len(docs) % batchsize
-        if (rest != 0):
-            batchsize = batchsize + 1
+    #while rest != 0:
+    #    rest = len(docs) % batchsize
+    #    if (rest != 0):
+    #        batchsize = batchsize + 1
         
     # The total number of documents (is supposed to be a huge/infinite number in an online setting)
     D = 3.3e6
     #D = len(docs)
     # The number of topics
     K = 40
+    #K = 50
 
     # How many documents to look at
     #print batchsize
     #print sys.argv[0]
     if (len(sys.argv) == 2):
         #print 'Got into IF...'
-        documentstoanalyze = int(len(docs)/batchsize)
+        documentstoanalyze = int(math.ceil(len(docs)/float(batchsize)))
     elif (len(sys.argv) == 3):
         documentstoanalyze = int(sys.argv[2])
     elif (len(sys.argv) == 4):
@@ -84,11 +91,14 @@ def main():
     
     #print documentstoanalyze
     # Our vocabulary
-    vocab = file('./dictnostops.txt').readlines()
+    #vocab = file('./dictnostops.txt').readlines()
+    vocab = file('./wlist_match10.txt').readlines()
+
     W = len(vocab)
 
     # Initialize the algorithm with alpha=1/K, eta=1/K, tau_0=1024, kappa=0.7
-    olda = onlineldavb.OnlineLDA(vocab, K, D, 1./K, 1./K, 1024., 0.7)
+    olda = onlineldavb.OnlineLDA(vocab, K, D, 0.5, 0.5, 1024., 0.7)
+    #olda = onlineldavb.OnlineLDA(vocab, K, D, 1./K, 1./K, 1024., 0.7)
     # Dictionary for storing gamma values of the processed text files
     gamma_all = dict()
     #olda = onlineldavb.OnlineLDA(vocab, K, D, 0.01, 0.01, 1024., 0.7)
@@ -110,6 +120,8 @@ def main():
         # in the current iteration 
 	for i in range(len(operation_id)):
             gamma_all[operation_id[i]] = list(gamma[i])
+
+        print(iteration, resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
 
         # Save lambda, the parameters to the variational distributions
         # over topics, and gamma, the parameters to the variational
