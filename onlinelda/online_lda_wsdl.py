@@ -21,6 +21,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 import cPickle, string, numpy, getopt, sys, random, time, re, pprint, os, math
+import resource
 
 import onlineldavb
 #import wikirandom
@@ -60,8 +61,8 @@ def main():
 
     # The number of documents to analyze each iteration
     rest = 1
-    batchsize = int(math.ceil(len(docs)/100))
-    #batchsize = 15
+    #batchsize = int(math.ceil(len(docs)/100))
+    batchsize = 15
     #print len(docs)
     #while rest != 0:
     #    rest = len(docs) % batchsize
@@ -72,8 +73,8 @@ def main():
     D = 3.3e6
     #D = len(docs)
     # The number of topics
-    #K = 32
-    K = 45
+    K = 40
+    #K = 50
 
     # How many documents to look at
     #print batchsize
@@ -119,6 +120,8 @@ def main():
         # in the current iteration 
 	for i in range(len(operation_id)):
             gamma_all[operation_id[i]] = list(gamma[i])
+
+        print(iteration, resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
 
         # Save lambda, the parameters to the variational distributions
         # over topics, and gamma, the parameters to the variational

@@ -55,6 +55,8 @@ echo "Documentation Processing Done!"
 echo
 cd onlinelda
 #echo "I will now fetch you a list of connected users:"
+printf 'Elapsed time step 1: %s\n' $(timer $t)
+echo
 echo "--> Starting Step 2: Running Online LDA over the information regarding service operations."
 echo
 python online_lda_wsdl.py ../.doc/
