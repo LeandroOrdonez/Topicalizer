@@ -26,7 +26,7 @@ the variational posterior over the topics more quickly than a batch
 VB algorithm could for large corpora.
 
 
-##Files/Directories provided:
+## Files/Directories provided:
 * `lib/`: Java Dependencies.
 * `onlinelda/`: Folder containing the Python scripts which uses online VB for LDA to analyze 
   the information that has been extracted from SOAP API descriptors.
@@ -45,12 +45,12 @@ You will need to have the numpy and scipy packages installed somewhere
 that Python can find them to use these scripts.
 
 
-##System Requirements:
+## System Requirements:
 * `Java 1.6.x` or greater.
 * `MySQL 5.5.x`
 * `Apache Tomcat 7.x` (or any available servlet container, listening at 8080 port).
 
-##Initial Settings
+## Initial Settings
 1. In MySQL create a Database with name `service_registry`.
 2. Deploy both of the Sesame Framework .war files on your servlet container.
    After you have deployed the Sesame Server webapp, you should be able to access it, by
@@ -63,7 +63,7 @@ that Python can find them to use these scripts.
    ```
    $chmod u+x run.sh
    ```
-##Running
+## Running
 * Open a terminal and type `./run.sh` followed by the path of a text file containing the
   list of service descriptor URIs. You could use the `sample-service-uris.txt` provided
   with the tool.
