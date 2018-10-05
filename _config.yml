@@ -1,0 +1,8 @@
+title: Topicalizer
+description: Automatic Web API Categorization and Annotation
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
