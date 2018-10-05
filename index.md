@@ -63,7 +63,9 @@ that Python can find them to use these scripts.
    ```
    $chmod u+x run.sh
    ```
+
 ## Running
+
 * Open a terminal and type `./run.sh` followed by the path of a text file containing the
   list of service descriptor URIs. You could use the `sample-service-uris.txt` provided
   with the tool.
